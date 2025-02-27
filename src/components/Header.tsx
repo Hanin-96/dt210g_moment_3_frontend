@@ -1,23 +1,30 @@
 import logotyp from "../assets/logotyp.svg";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import HeaderModuleStyle from "../components/HeaderStyle.module.css";
 
 function header() {
-
   const { user, logout } = useAuth();
+
+
   return (
     <>
-      <header>
-        <ul>
-          <li><NavLink to="/">Startsida</NavLink></li>
-          <li>
+      <header className={HeaderModuleStyle.header}>
+        <div className={HeaderModuleStyle.headerContainer}>
+          <img src={`${logotyp}`} alt="logotyp" />
+          <ul>
+            <li><NavLink to="/" className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Startsida</NavLink></li>
             {
-              !user ? <NavLink to="/login">Logga in</NavLink> : <NavLink to="/login" onClick={logout}>Logga ut</NavLink>
+              user ? <li><NavLink to="/mypage" className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Min sida</NavLink></li> : ""
             }
-          </li>
-          <li><NavLink to="/mypage">Min sida</NavLink></li>
-        </ul>
-        <img src={`${logotyp}`} alt="logotyp" />
+            <li>
+              {
+                !user ? <NavLink to="/login"className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Logga in</NavLink> : <NavLink to="/login" onClick={logout}>Logga ut</NavLink>
+              }
+            </li>
+
+          </ul>
+        </div>
       </header>
     </>
   )

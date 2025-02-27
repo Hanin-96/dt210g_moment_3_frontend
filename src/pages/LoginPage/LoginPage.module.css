@@ -1,0 +1,38 @@
+
+
+.loginContainer {
+    background-color: #D3D3D3;
+    max-width: 40rem;
+    margin: 5rem auto;
+    width: 100%;
+    padding: 5rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 5px -3px rgb(30, 30, 30, 0.5);
+    border: #D3D3D3 2px solid;
+}
+
+.form input {
+    width: 100%;
+    padding: 0.5rem;
+    display: block;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+    border: 1px solid #c4c4c4;
+    box-shadow: 0 0 5px -2px rgb(30, 30, 30, 0.5);
+}
+
+.form button {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: #1e1e1e;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: white;
+    color: #1e1e1e;
+    box-shadow: 0 5px 5px -3px rgb(30, 30, 30, 0.5);
+}

@@ -1,0 +1,38 @@
+.header {
+    background-color: #D3D3D3;
+    padding: 1rem;
+    box-shadow: 0 1px 5px -1px rgb(30, 30, 30, 0.5);
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header ul {
+    margin-top: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.header ul li a {
+    text-decoration: none;
+    color: #1e1e1e;
+    padding: 0.8rem;
+}
+
+.header .active {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px -3px rgb(30, 30, 30, 0.5);
+}
+
+.header ul li a:hover {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px -3px rgb(30, 30, 30, 0.5);
+
+}

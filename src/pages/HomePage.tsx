@@ -22,6 +22,17 @@ function HomePage() {
 
   console.log("Images in HomePage:", images); 
 
+  const imageWrap : object= {
+    maxHeight: "20rem"
+  }
+
+  const imageContainer : object= {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "2rem",
+    justifyContent: "center"
+  }
+
 
 
   return (
@@ -29,13 +40,13 @@ function HomePage() {
       <h1>PinCollage</h1>
       <h2>Startsida</h2>
 
-      <div>
+      <div style={imageContainer}>
         {images && images.length > 0 ? (
           images.map((image: Image) => (
             <div key={image._id}>
               <h2>{image.title}</h2>
               <p>{image.description}</p>
-              <img src={`http://localhost:3000/image/${image.fileName}`} alt={image.title} style={{ maxWidth: "300px" }} />
+              <img src={`http://localhost:3000/image/${image.fileName}`} alt={image.title} style={imageWrap} />
             </div>
           ))
         ) : (

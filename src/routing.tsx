@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MyPage from "./pages/MyPage";
 import { ImagesProvider } from "./context/ImagesContext";
