@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 
 import { User, LoginCredentials, AuthResponse, AuthContextType } from "../types/auth.types";
 
@@ -29,6 +29,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 throw new Error("Inloggning misslyckades");
             } else {
                 const loginData = await response.json() as AuthResponse;
+                console.log("LoginData från servern:", loginData);
 
                 //Lagra token i localstorage
                 localStorage.setItem("token", loginData.token);
@@ -45,11 +46,55 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     }
 
+    //Logga ut
     const logout = () => {
         //Ta bort token
         localStorage.removeItem("token");
         setUser(null);
     }
+
+
+
+    //Validera token för inloggad
+    const checkToken = async () => {
+        const token = localStorage.getItem("token");
+
+        if(!token) {
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:3000/userpage", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                }
+            })
+
+            if(response.ok) {
+                const data = await response.json();
+                setUser(data.token);
+            }
+
+        } catch {
+            localStorage.removeItem("token");
+            setUser(null);
+        }
+    }
+
+    
+    //Köra metod för kontroll om användare är inne
+    useEffect(() => {
+        checkToken();
+        // Set up an interval to check the token every minute (60000 milliseconds)
+        const intervalId = setInterval(() => {
+            checkToken();
+        }, 1800000);
+
+        // Clean up the interval when the component unmounts
+        return () => clearInterval(intervalId);
+    }, [])
 
     return (
         <AuthContext.Provider value={{ user, login, logout }}>

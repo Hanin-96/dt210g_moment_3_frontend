@@ -1,25 +1,38 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+//Importera authcontext
+import { useAuth } from "../context/AuthContext";
+
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
+    const {login, user} = useAuth();
+    const navigate = useNavigate();
 
+    //Kontrollera användare
+    useEffect(() => {
+        if (user) {
+            console.log("User updated:", user);
+            navigate("/mypage");
+        } 
+    }, [user])
+    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
-        /*
 
         try {
             await login({ username, password });
-
+            console.log("Inloggning lyckades: ", user)
 
         } catch (error) {
-            setError("Inloggningen misslyckades!")
+            setError("Inloggningen misslyckades! Fel användarnamn/lösenord")
 
         }
-            */
+        
     }
   return (
     <>
