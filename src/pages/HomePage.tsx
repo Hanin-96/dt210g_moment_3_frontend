@@ -1,52 +1,48 @@
 import { useEffect, useState } from 'react'
-import { PostImageInterface } from '../interfaces/image.interface';
+import { useImage } from '../context/ImagesContext';
+import { Image } from '../types/fetch.types';
 function HomePage() {
-     const [storedPosts, setStoredPosts] = useState<PostImageInterface[]>([]);
-    
-      //useEffect för att hämta in poster
-      useEffect(() => {
-        getTodos();
-      }, []);
-    
-      const getTodos = async () => {
-        try {
-          const response = await fetch("https://dt210g-moment-3-api.onrender.com/images", {
-            method: "GET",
-            headers: {
-              "Content-type": "application/json"
-            }
-          });
-    
-          if (!response.ok) {
-            throw Error("Misslyckades hämtning av poster" + response.status);
-          } else {
-            const postData = await response.json();
-            const storedPosts = postData.images;
-            setStoredPosts(storedPosts);
-            return storedPosts;
-          }
-    
-        }
-        catch (error) {
-          throw error;
-        }
+  const [error, setError] = useState('');
+
+  const { images, getImages } = useImage();
+
+  //useEffect för att hämta in poster
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        await getImages()
+
+      } catch (error) {
+        setError("Det gick inte att hämta in bilder")
+
       }
+    };
+    fetchImages();
+  }, []);
+
+  console.log("Images in HomePage:", images); 
+
+
 
   return (
     <>
-    <h1>PinCollage</h1>
-    <h2>Startsida</h2>
+      <h1>PinCollage</h1>
+      <h2>Startsida</h2>
 
-    <div>
-            {storedPosts.map((post: PostImageInterface) => (
-              <div key={post._id}>
-                <h2>{post.title}</h2>
-                <p>{post.description}</p>
-                <img src={`http://localhost:3000/image/${post.fileName}`} alt={post.title} style={{maxWidth: "300px"}}/>
-              </div>
-            ))}
-    
-          </div>
+      <div>
+        {images && images.length > 0 ? (
+          images.map((image: Image) => (
+            <div key={image._id}>
+              <h2>{image.title}</h2>
+              <p>{image.description}</p>
+              <img src={`http://localhost:3000/image/${image.fileName}`} alt={image.title} style={{ maxWidth: "300px" }} />
+            </div>
+          ))
+        ) : (
+          <p>{error}</p>
+        )}
+
+      </div>
     </>
   )
 }

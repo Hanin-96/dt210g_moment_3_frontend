@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MyPage from "./pages/MyPage";
+import { ImagesProvider } from "./context/ImagesContext";
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,11 @@ const router = createBrowserRouter([
             {
                 //Huvudrouting
                 path: "/",
-                element: <HomePage />,
+                element: (
+                    <ImagesProvider>
+                        <HomePage />
+                    </ImagesProvider>
+                ),
             },
             {
                 path: "/login",
