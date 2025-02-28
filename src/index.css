@@ -21,7 +21,7 @@ body {
 main {
   width: 100%;
   margin: 0 auto;
-  padding: 1rem;
+  position: relative;
 }
 
 p, a, label {

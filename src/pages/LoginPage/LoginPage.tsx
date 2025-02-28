@@ -1,4 +1,5 @@
 import LoginStyle from "../LoginPage/LoginPage.module.css";
+import bgPattern from "../../assets/pattern.svg";
 import { useState, useEffect } from "react"
 //Importera authcontext
 import { useAuth } from "../../context/AuthContext";
@@ -33,39 +34,51 @@ function LoginPage() {
             setError("Fel användarnamn/lösenord")
 
         }
+    }
+
+    const bgPatternStyle: object = {
+        "position": "absolute",
+        "width": "100%",
+        "opacity": "1",
+        "zIndex": "-1",
+        "objectFit": "cover",
+        "height": "100%",
 
     }
     return (
         <>
-            <div className={LoginStyle.loginContainer}>
-                <h1 style={{ textAlign: "center", marginBottom: "4rem" }}>Inloggning</h1>
-                <form onSubmit={handleSubmit} className={LoginStyle.form}>
-                    <label htmlFor="username">Användarnamn:</label>
-                    <input
-                        id="username"
-                        type="username"
-                        required
-                        value={username}
-                        onChange={(event) => setUsername(event.target.value)} />
+        <img src={bgPattern} alt="Mönster" style={bgPatternStyle}/>
+            <div style={{padding: "1rem", paddingTop: "20rem", paddingBottom: "20rem"}}>
+                <div className={LoginStyle.loginContainer}>
+                    <h1 style={{ textAlign: "center", marginBottom: "4rem" }}>Inloggning</h1>
+                    <form onSubmit={handleSubmit} className={LoginStyle.form}>
+                        <label htmlFor="username">Användarnamn:</label>
+                        <input
+                            id="username"
+                            type="username"
+                            required
+                            value={username}
+                            onChange={(event) => setUsername(event.target.value)} />
 
-                    <br />
-
-                    <label htmlFor="password">Lösenord:</label>
-                    <input
-                        id="password"
-                        type="text"
-                        required
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)} />
-                        
                         <br />
 
-                    {
-                        error && <span style={{fontSize: "1.5rem", color: "red"}}>{error}</span>
-                    }
-                    <br />
-                    <button type="submit" style={{marginTop: "2rem"}}>Logga in</button>
-                </form>
+                        <label htmlFor="password">Lösenord:</label>
+                        <input
+                            id="password"
+                            type="text"
+                            required
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)} />
+
+                        <br />
+
+                        {
+                            error && <span style={{ fontSize: "1.5rem", color: "red" }}>{error}</span>
+                        }
+                        <br />
+                        <button type="submit" style={{ marginTop: "2rem" }}>Logga in</button>
+                    </form>
+                </div>
             </div>
         </>
     )
