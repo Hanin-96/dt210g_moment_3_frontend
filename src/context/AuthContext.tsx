@@ -58,6 +58,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     //Validera token för inloggad
     const checkToken = async () => {
         const token = localStorage.getItem("token");
+        
 
         if(!token) {
             return;
@@ -74,7 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
             if(response.ok) {
                 const data = await response.json();
-                setUser(data.token);
+                setUser(data.user);
             }
 
         } catch {
@@ -87,14 +88,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     //Köra metod för kontroll om användare är inne
     useEffect(() => {
         checkToken();
+    
         // Set up an interval to check the token every minute (60000 milliseconds)
         const intervalId = setInterval(() => {
             checkToken();
         }, 1800000);
 
-        // Clean up the interval when the component unmounts
+        //Rensa intervallet
         return () => clearInterval(intervalId);
     }, [])
+
+    
 
     return (
         <AuthContext.Provider value={{ user, login, logout }}>
