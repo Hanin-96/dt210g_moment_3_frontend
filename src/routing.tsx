@@ -37,9 +37,11 @@ const router = createBrowserRouter([
             {
                 path: "/mypage",
                 element: (
-                    <ProtectedRoute>
-                        <MyPage />
-                    </ProtectedRoute>
+                    <ImagesProvider>
+                        <ProtectedRoute>
+                            <MyPage />
+                        </ProtectedRoute>
+                    </ImagesProvider>
                 )
             },
 

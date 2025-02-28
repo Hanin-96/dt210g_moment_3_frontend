@@ -5,7 +5,7 @@ export interface Image {
     title: string,
     description: string,
     fileName: string,
-    userId: string,
+    userId: { _id: string; firstname: string; lastname: string; username: string },
     username: string,
     firstname: string,
     lastname: string

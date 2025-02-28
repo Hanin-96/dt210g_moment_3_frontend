@@ -52,7 +52,7 @@ function ImagePage() {
     return (
         <>
 
-            <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto" }}>
+            <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto 20rem auto" }}>
                 {oneImage &&
                     <article key={oneImage._id} style={{...articleStyle, opacity: imageLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out"}}>
                         <div>
@@ -63,7 +63,7 @@ function ImagePage() {
                         <div>
                             <h1>{oneImage.title}</h1>
                             <p>{oneImage.description}</p>
-                            <p>{oneImage.userId}</p>
+                            <p>{oneImage.username}</p>
                         </div>
 
                     </article>

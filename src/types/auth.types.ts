@@ -1,6 +1,6 @@
 //Typer för autentisering context fil
 export interface User {
-    id: string,
+    _id: string,
     firstname: string,
     lastname: string,
     email: string,

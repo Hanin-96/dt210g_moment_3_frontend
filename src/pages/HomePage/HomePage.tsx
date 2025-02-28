@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import HomeStyle from "../HomePage/HomeStyle.module.css";
 function HomePage() {
   const [error, setError] = useState('');
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const { images, getImages } = useImage();
 
@@ -13,6 +14,7 @@ function HomePage() {
     const fetchImages = async () => {
       try {
         await getImages()
+        setImagesLoaded(true);
 
       } catch (error) {
         setError("Det gick inte att hämta in bilder")
@@ -41,7 +43,7 @@ function HomePage() {
 
   return (
     <>
-      <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto" }}>
+      <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto", opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s"}}>
         <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>PinCollect</h1>
 
         <div style={imageContainer}>

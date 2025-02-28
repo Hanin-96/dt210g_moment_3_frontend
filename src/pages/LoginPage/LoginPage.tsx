@@ -39,7 +39,7 @@ function LoginPage() {
     const bgPatternStyle: object = {
         "position": "absolute",
         "width": "100%",
-        "opacity": "1",
+        "opacity": "0.8",
         "zIndex": "-1",
         "objectFit": "cover",
         "height": "100%",

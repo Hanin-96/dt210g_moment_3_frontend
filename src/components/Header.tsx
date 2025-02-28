@@ -11,7 +11,7 @@ function header() {
     <>
       <header className={HeaderModuleStyle.header}>
         <div className={HeaderModuleStyle.headerContainer}>
-          <img src={`${logotyp}`} alt="logotyp" />
+          <NavLink to="/"><img src={`${logotyp}`} alt="logotyp" style={{display: "block"}}/></NavLink>
           <ul>
             <li><NavLink to="/" className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Startsida</NavLink></li>
             <li>
@@ -19,7 +19,7 @@ function header() {
             </li>
             <li>
               {
-                !user ? <NavLink to="/login"className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Logga in</NavLink> : <NavLink to="/login" onClick={logout}>Logga ut</NavLink>
+                !user ? <NavLink to="/login" className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Logga in</NavLink> : <NavLink to="/login" onClick={logout}>Logga ut</NavLink>
               }
             </li>
 
