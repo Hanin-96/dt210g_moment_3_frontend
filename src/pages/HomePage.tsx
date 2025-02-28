@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useImage } from '../context/ImagesContext';
 import { Image } from '../types/fetch.types';
+import { Link } from 'react-router-dom';
 function HomePage() {
   const [error, setError] = useState('');
 
@@ -20,19 +21,18 @@ function HomePage() {
     fetchImages();
   }, []);
 
-  console.log("Images in HomePage:", images); 
+  console.log("Images in HomePage:", images);
 
-  const imageWrap : object= {
+  const imageWrap: object = {
     maxHeight: "20rem"
   }
 
-  const imageContainer : object= {
+  const imageContainer: object = {
     display: "flex",
     flexWrap: "wrap",
     gap: "2rem",
     justifyContent: "center"
   }
-
 
 
   return (
@@ -44,9 +44,10 @@ function HomePage() {
         {images && images.length > 0 ? (
           images.map((image: Image) => (
             <div key={image._id}>
-              <h2>{image.title}</h2>
-              <p>{image.description}</p>
-              <img src={`http://localhost:3000/image/${image.fileName}`} alt={image.title} style={imageWrap} />
+              <Link to={`/${image._id}`}>
+                <img src={`http://localhost:3000/file/${image.fileName}`} alt={image.title} style={imageWrap} />
+              </Link>
+
             </div>
           ))
         ) : (
