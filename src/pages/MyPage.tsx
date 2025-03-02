@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext"
 import { useImage } from "../context/ImagesContext";
 import { Image } from '../types/fetch.types';
+import MyPageImages from "../components/MyPageImages";
 
 
 function MyPage() {
@@ -15,10 +16,10 @@ function MyPage() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        await getImages();
- 
-          setImagesLoaded(true);
-        
+        getImages();
+
+        setImagesLoaded(true);
+
 
       } catch (error) {
         setError("Det gick inte att hämta in bilder")
@@ -30,7 +31,7 @@ function MyPage() {
 
   return (
     <>
-      <div style={{opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s", maxWidth: "100rem", width: "100%", margin: "4rem auto 20rem auto", padding: "0 1rem"}}>
+      <div style={{ opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s", maxWidth: "100rem", width: "100%", margin: "4rem auto 20rem auto", padding: "0 1rem" }}>
         <h1>Min sida</h1>
         <h2>Inloggad</h2>
         <p>Välkommen {user?.firstname ? user.firstname : ""}</p>
@@ -45,16 +46,13 @@ function MyPage() {
 
 
         <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto" }}>
-          <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>PinCollect</h1>
+          <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>Bildsamling</h1>
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem" }}>
             {images && images.length > 0 ? (
               images.filter((image: Image) => image.userId?._id === user?._id)
                 .map((image: Image) => (
-                  <div key={image._id} style={{ position: "relative" }}>
-                    <p>imageId: {image._id}</p>
-                    <img src={`http://localhost:3000/file/${image.fileName}`} alt={image.title} style={{ maxWidth: "30rem" }} />
-                  </div>
+                  <MyPageImages myPageImagesProp = {image} key={image._id} />
 
                 ))
             ) :
@@ -62,6 +60,8 @@ function MyPage() {
             }
 
           </div>
+
+
         </div >
       </div>
     </>
