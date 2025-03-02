@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext"
 import { useImage } from "../context/ImagesContext";
 import { Image } from '../types/fetch.types';
 import MyPageImages from "../components/MyPageImages";
+import PostModal from "../components/Modal/PostModal";
 
 
 function MyPage() {
@@ -11,6 +12,9 @@ function MyPage() {
   const [error, setError] = useState('');
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const { images, getImages } = useImage();
+
+  //State för att visa modal
+  const [showModal, setShowModal] = useState(false);
 
   //useEffect för att hämta in poster
   useEffect(() => {
@@ -27,7 +31,13 @@ function MyPage() {
       }
     };
     fetchImages();
-  }, []);
+
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [showModal]);
 
   return (
     <>
@@ -48,11 +58,16 @@ function MyPage() {
         <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto" }}>
           <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>Bildsamling</h1>
 
+          <div>
+            <button onClick={() => setShowModal(true)} style={{ backgroundColor: "#1e1e1e", color: "white", padding: "1rem", border: "none", borderRadius: "0.5rem", cursor: "pointer" }}>Lägg till</button>
+            {showModal && <PostModal onCloseProp={() => setShowModal(false)} />}
+          </div>
+
           <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem" }}>
             {images && images.length > 0 ? (
               images.filter((image: Image) => image.userId?._id === user?._id)
                 .map((image: Image) => (
-                  <MyPageImages myPageImagesProp = {image} key={image._id} />
+                  <MyPageImages myPageImagesProp={image} key={image._id} />
 
                 ))
             ) :

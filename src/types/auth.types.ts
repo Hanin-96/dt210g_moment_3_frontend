@@ -6,7 +6,7 @@ export interface User {
     email: string,
     username: string,
     password: string
-}
+}   
 
 //Inloggning credentials
 export interface LoginCredentials {

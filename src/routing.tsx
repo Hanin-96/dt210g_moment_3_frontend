@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ImagePage from "./pages/ImagePage";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./context/ProtectedRoute";
 import MyPage from "./pages/MyPage";
 import { ImagesProvider } from "./context/ImagesContext";
 

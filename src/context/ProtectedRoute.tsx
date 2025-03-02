@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { ReactNode } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "./AuthContext";
 
 interface ProtectedRouteProps {
     children: ReactNode
@@ -13,7 +13,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     //Finns ej användare, redirect till login sida
     if (!user) {
         return <Navigate to="/login" replace />
-    } 
+    }
 
     return (
         <>
