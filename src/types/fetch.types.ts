@@ -18,4 +18,5 @@ export interface ImageContextType {
     getOneImage: (imageId: string) => Promise<void>,
     //postImage: () => void;
     getImages: () => void;
+    deleteImage: (imageId: string) => Promise<void>
 }

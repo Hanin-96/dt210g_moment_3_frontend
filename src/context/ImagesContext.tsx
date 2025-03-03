@@ -59,9 +59,27 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
 
     }
 
+    async function deleteImage(imageId: string) {
+        try {
+            const response = await fetch(`http://localhost:3000/image/${imageId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            if (response.ok) {
+               await getImages();
+            } 
+
+        } catch (error) {
+            console.error("Det gick inte att radera bilden:", error);
+        }
+    }
+
 
     return (
-        <ImagesContext.Provider value={{ images, getImages, getOneImage, oneImage }}>
+        <ImagesContext.Provider value={{ images, getImages, getOneImage, deleteImage, oneImage }}>
             {children}
         </ImagesContext.Provider>
     )
