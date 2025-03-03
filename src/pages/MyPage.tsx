@@ -39,6 +39,17 @@ function MyPage() {
     }
   }, [showModal]);
 
+  const addBtn: object = {
+    backgroundColor: "#1e1e1e",
+    color: "white",
+    padding: "1rem",
+    border: "none",
+    borderRadius: "0.5rem",
+    cursor: "pointer",
+    width: "100%",
+    marginBottom: "5rem"
+  }
+
   return (
     <>
       <div style={{ opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s", maxWidth: "100rem", width: "100%", margin: "4rem auto 20rem auto", padding: "0 1rem" }}>
@@ -59,7 +70,7 @@ function MyPage() {
           <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>Bildsamling</h1>
 
           <div>
-            <button onClick={() => setShowModal(true)} style={{ backgroundColor: "#1e1e1e", color: "white", padding: "1rem", border: "none", borderRadius: "0.5rem", cursor: "pointer" }}>Lägg till</button>
+            <button onClick={() => setShowModal(true)} style={addBtn}>Lägg till</button>
             {showModal && <PostModal onCloseProp={() => setShowModal(false)} />}
           </div>
 

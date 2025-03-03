@@ -11,6 +11,10 @@
     height: 100%;
 }
 
+.pageBody h1 {
+    text-align: center;
+}
+
 .textBoxStyle {
     position: absolute;
     top: 50%;
@@ -19,6 +23,10 @@
     color: #1e1e1e;
     padding: 1rem;
     background-color: white;
+    max-width: 40rem;
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px -1px rgb(30, 30, 30, 0.5);
 }
 
 .textBoxStyle button {
@@ -28,6 +36,30 @@
 
 .modalBtn {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     cursor: pointer;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.modalBtn button {
+    padding: 1rem;
+    max-width: 20rem;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+}
+
+
+
+span {
+    width: 100%;
+    max-width: fit-content;
 }
