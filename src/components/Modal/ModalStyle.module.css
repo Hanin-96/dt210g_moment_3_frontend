@@ -34,12 +34,21 @@
     cursor: pointer;
 }
 
+.btnCancel {
+    box-shadow: none;
+}
+
 .modalBtn {
     display: flex;
     gap: 2rem;
     cursor: pointer;
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+.modalBtn button:last-child {
+    background-color: #1e1e1e;
+    color: white
 }
 
 .modalBtn button {

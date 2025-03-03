@@ -37,8 +37,10 @@ function ImagePage() {
         backgroundColor: "#1e1e1e",
         color: "white",
         width: "100%",
+        maxWidth: "30rem",
         marginTop: "2rem",
-        border: "none"
+        border: "none",
+        borderRadius: "0.5rem"
     }
 
     const articleStyle: object = {
@@ -61,8 +63,8 @@ function ImagePage() {
 
                         <div style={{width: "100%"}}>
                             <h1>{oneImage.title}</h1>
+                            <br />
                             <p>{oneImage.description}</p>
-                            <p>{oneImage.username}</p>
                         </div>
 
                     </article>

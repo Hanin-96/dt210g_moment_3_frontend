@@ -30,6 +30,8 @@ p, a, label {
 
 button {
   font-size: 1.8rem;
+  box-shadow: 0 2px 5px -1px rgb(30, 30, 30, 0.3);
+
 }
 
 h1 {

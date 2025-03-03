@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, ReactNode } from "react";
-import { Image, ImageContextType } from "../types/fetch.types";
+import { Image, ImageContextType, PostImage } from "../types/fetch.types";
 
 
 const ImagesContext = createContext<ImageContextType | null>(null);
@@ -11,6 +11,7 @@ interface ImagesProviderProps {
 export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
     const [images, setImages] = useState<Image[]>([]);
     const [oneImage, setOneImage] = useState<Image | null>(null);
+    const [error, setError] = useState("");
 
     const getImages = async (): Promise<void> => {
         try {
@@ -69,8 +70,38 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
             })
 
             if (response.ok) {
-               await getImages();
-            } 
+                await getImages();
+            }
+
+        } catch (error) {
+            console.error("Det gick inte att radera bilden:", error);
+        }
+    }
+
+    async function postImage(image: PostImage, userId: string) {
+        try {
+
+            if (userId == "") {
+                setError("Du har inget användarId");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("title", image.title);
+            formData.append("description", image.description);
+
+            if (image.file) {
+                formData.append("file", image.file);
+            }
+
+            const response = await fetch(`http://localhost:3000/upload/${userId}`, {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                await getImages();
+            }
 
         } catch (error) {
             console.error("Det gick inte att radera bilden:", error);
@@ -79,7 +110,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
 
 
     return (
-        <ImagesContext.Provider value={{ images, getImages, getOneImage, deleteImage, oneImage }}>
+        <ImagesContext.Provider value={{ images, getImages, getOneImage, deleteImage, postImage, oneImage }}>
             {children}
         </ImagesContext.Provider>
     )

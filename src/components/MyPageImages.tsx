@@ -10,13 +10,7 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
     const [showModal, setShowModal] = useState(false);
     const { deleteImage } = useImage();
 
-    useEffect(() => {
-        if (showModal) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-    }, [showModal]);
+   
 
     const imgBtnWrap: object = {
         display: "flex",
@@ -39,27 +33,33 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
         marginBottom: "5rem"
     }
 
+    const titleText: object = {
+       fontWeight: "bold",
+       margin: "0"
+    }
+
 
 
 
     return (
         <>
             <div key={myPageImagesProp._id} style={{ position: "relative" }}>
-                <p>imageId: {myPageImagesProp._id}</p>
+                    <p>Titel: <span style={titleText}>{myPageImagesProp.title}</span></p>
+                <br />
                 <div style={imgBtnWrap}>
                     <img src={`http://localhost:3000/file/${myPageImagesProp.fileName}`} alt={myPageImagesProp.title} style={{ maxHeight: "40rem", objectFit: "cover", height: "100%", width: "100%" }} />
 
                     <div style={{ display: "flex", gap: "2rem", justifyContent: "space-between" }}>
-                        <button onClick={() => setShowModal(true)} style={btnStyle}>Radera</button>
+                        <button onClick={() => setShowModal(true)} style={btnStyle}>Ta bort</button>
                         {showModal && <DeleteModal onCloseProp={
-                            (confirmDelete) => {
-                                if(confirmDelete) {
-                                    // Delete funktion ska kallas här
+                            (confirmDelete: boolean) => {
+                                if (confirmDelete) {
+                                    //Delete funktion ska kallas här
                                     deleteImage(myPageImagesProp._id)
                                 }
                                 setShowModal(false)
                             }
-                            } />}
+                        } />}
 
                         <button style={{ ...btnStyle, backgroundColor: "white", color: "#1e1e1e" }}>Ändra</button>
                     </div>
