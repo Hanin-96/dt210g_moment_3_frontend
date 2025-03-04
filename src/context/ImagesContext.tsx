@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, ReactNode } from "react";
-import { Image, ImageContextType, PostImage } from "../types/fetch.types";
+import { Image, ImageContextType, PostImage, UpdateImage } from "../types/fetch.types";
 
 
 const ImagesContext = createContext<ImageContextType | null>(null);
@@ -62,10 +62,13 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
 
     async function deleteImage(imageId: string) {
         try {
+            const token = localStorage.getItem("token");
+
             const response = await fetch(`http://localhost:3000/image/${imageId}`, {
                 method: "DELETE",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
                 }
             })
 
@@ -94,9 +97,14 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
                 formData.append("file", image.file);
             }
 
+            const token = localStorage.getItem("token");
+
             const response = await fetch(`http://localhost:3000/upload/${userId}`, {
                 method: "POST",
                 body: formData,
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
             });
 
             if (response.ok) {
@@ -104,13 +112,40 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
             }
 
         } catch (error) {
-            console.error("Det gick inte att radera bilden:", error);
+            console.error("Det gick inte att lägga till bilden:", error);
+        }
+    }
+
+    async function putImage(image: UpdateImage, imageId: string) {
+        try {
+
+            if (imageId == "") {
+                setError("Du har inget bild Id");
+                return;
+            }
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(`http://localhost:3000/image/${imageId}`, {
+                method: "PUT",
+                body: JSON.stringify(image),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                }
+            });
+
+            if (response.ok) {
+                await getImages();
+            }
+
+        } catch (error) {
+            console.error("Det gick inte att ändra bildinformationen:", error);
         }
     }
 
 
     return (
-        <ImagesContext.Provider value={{ images, getImages, getOneImage, deleteImage, postImage, oneImage }}>
+        <ImagesContext.Provider value={{ images, getImages, getOneImage, deleteImage, postImage, putImage, oneImage }}>
             {children}
         </ImagesContext.Provider>
     )

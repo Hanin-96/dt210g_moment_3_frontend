@@ -14,12 +14,15 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
     const [error, setError] = useState("");
 
 
-    async function handleOnSubmit(event: React.FormEvent<HTMLFormElement>) {
+    const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setError('');
 
         if(typeof(file) === "undefined") {
-            setError("Filen saknas");
+            setError("Bildfilen saknas");
+            return;
+        } else if(file.size > 1000000) {
+            setError("Bildfilen får max vara 1mb");
             return;
         }
         console.log('file', file);
@@ -28,7 +31,8 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
 
     }
 
-    function handleOnChangeImage(event: React.FormEvent<HTMLInputElement>) {
+    const handleOnChangeImage =(event: React.FormEvent<HTMLInputElement>) => {
+        setError("");
         const target = event.target as HTMLInputElement & {
             files : FileList;
         }
@@ -68,7 +72,7 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
                             </div>
                             <input 
                             type="file" 
-                            accept='image/png, image/jpg'
+                            accept='image/png, image/jpg, image/JPG'
                             value={formData.file} 
                             onChange={handleOnChangeImage}
                             />

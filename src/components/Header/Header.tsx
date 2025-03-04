@@ -8,7 +8,7 @@ function Header() {
   const { user, logout } = useAuth();
   const [showMenu, setMenu] = useState(false);
 
-
+  //Toggla meny
   const toggleMenuBar = () => {
 
     setMenu(value => !value)

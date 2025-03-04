@@ -17,6 +17,11 @@ export interface PostImage {
     file: any //Måste vara av typ any för att inte bryta input type
 }
 
+export interface UpdateImage {
+    title: string,
+    description: string
+}
+
 export interface ImageContextType {
     images: Image[] | null,
     oneImage: Image | null,
@@ -25,4 +30,5 @@ export interface ImageContextType {
     getImages: () => void;
     deleteImage: (imageId: string) => Promise<void>
     postImage: (newImage:PostImage, userId: string) => Promise<void>
+    putImage: (updateImage: UpdateImage, userId: string) => Promise<void>
 }

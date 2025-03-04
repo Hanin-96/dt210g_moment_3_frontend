@@ -1,5 +1,6 @@
 import DeleteModal from "./Modal/DeleteModal";
-import { Image } from "../types/fetch.types"
+import PutModal from "./Modal/PutModal";
+import { Image, UpdateImage } from "../types/fetch.types"
 import { useState } from "react";
 
 //Importera authcontext
@@ -7,8 +8,9 @@ import { useImage } from "../context/ImagesContext";
 
 function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
     //State för att visa modal
-    const [showModal, setShowModal] = useState(false);
-    const { deleteImage } = useImage();
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showPutModal, setShowPutModal] = useState(false);
+    const { deleteImage, putImage } = useImage();
 
 
 
@@ -52,18 +54,30 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
                 </div>
 
                 <div style={{ display: "flex", gap: "2rem", justifyContent: "space-between" }}>
-                    <button onClick={() => setShowModal(true)} style={btnStyle}>Ta bort</button>
-                    {showModal && <DeleteModal onCloseProp={
+                    <button onClick={() => setShowDeleteModal(true)} style={btnStyle}>Ta bort</button>
+                    {showDeleteModal && <DeleteModal onCloseProp={
                         (confirmDelete: boolean) => {
                             if (confirmDelete) {
                                 //Delete funktion ska kallas här
                                 deleteImage(myPageImagesProp._id)
                             }
-                            setShowModal(false)
+                            setShowDeleteModal(false)
                         }
                     } />}
 
-                    <button style={{ ...btnStyle, backgroundColor: "white", color: "#1e1e1e" }}>Ändra</button>
+                    <button onClick={() => setShowPutModal(true)} style={{ ...btnStyle, backgroundColor: "white", color: "#1e1e1e" }}>Ändra</button>
+
+                    {showPutModal && <PutModal putImage={{title: myPageImagesProp.title, description: myPageImagesProp.description}} onCloseProp={
+                        (updateImage: UpdateImage) => {
+                            if (updateImage && updateImage.title != "" && updateImage.description != "") {
+                                //Delete funktion ska kallas här
+                                putImage(updateImage, myPageImagesProp._id)
+                            }
+                            setShowPutModal(false)
+                        }
+                    } />}
+
+                    
                 </div>
             </div>
         </>
