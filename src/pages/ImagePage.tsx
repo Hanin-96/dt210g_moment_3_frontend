@@ -37,7 +37,7 @@ function ImagePage() {
         backgroundColor: "#1e1e1e",
         color: "white",
         width: "100%",
-        maxWidth: "30rem",
+        maxWidth: "40rem",
         marginTop: "2rem",
         border: "none",
         borderRadius: "0.5rem"
@@ -56,8 +56,8 @@ function ImagePage() {
             <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto 20rem auto" }}>
                 {oneImage &&
                     <article key={oneImage._id} style={{...articleStyle, opacity: imageLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out"}}>
-                        <div>
-                            <img src={`http://localhost:3000/file/${oneImage.fileName}`} alt={oneImage.title} style={{ maxWidth: "50rem"}} />
+                        <div style={{maxWidth: "40rem", width: "100%"}}>
+                            <img src={`http://localhost:3000/file/${oneImage.fileName}`} alt={oneImage.title} style={{ maxWidth: "40rem", width: "100%"}} />
                             <p>&copy; {oneImage.firstname} {oneImage.lastname}</p>
                         </div>
 

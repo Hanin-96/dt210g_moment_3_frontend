@@ -52,7 +52,7 @@ function MyPage() {
         <h1>Min sida</h1>
         <h2>Inloggad, {user?.firstname ? user.firstname : ""}</h2>
 
-        <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto" }}>
+        <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto"}}>
           <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>Bildsamling</h1>
 
           <div>

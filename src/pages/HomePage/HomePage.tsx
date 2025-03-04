@@ -29,7 +29,8 @@ function HomePage() {
   const imageWrap: object = {
     maxHeight: "30rem",
     width: "100%",
-    display: "block"
+    display: "block",
+    objectFit: "cover"
   }
 
   const imageContainer: object = {
@@ -43,13 +44,13 @@ function HomePage() {
 
   return (
     <>
-      <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto", opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s"}}>
+      <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto", opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s", padding: "0 1rem"}}>
         <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>PinCollect</h1>
 
         <div style={imageContainer}>
           {images && images.length > 0 ? (
             images.map((image: Image) => (
-              <div key={image._id} style={{ position: "relative" }} className={HomeStyle.container}>
+              <div key={image._id} style={{ position: "relative"}} className={HomeStyle.container}>
                 <Link to={`/${image._id}`}>
                   <img src={`http://localhost:3000/file/${image.fileName}`} alt={image.title} style={imageWrap} />
 
