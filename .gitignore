@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 logotyp.ai
+package-lock.json
