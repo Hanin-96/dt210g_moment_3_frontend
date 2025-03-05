@@ -11,7 +11,7 @@ Applikationen uppfyller kraven på CRUD och autentisering.
 
 Applikationen ska kommunicera med databasen MongoDB och backendramverket Hapi tillsammans.
 
-## Komponenter
+## Komponenter & Pages
 Applikationen består av flera olika komponenter som tillsammans renderas ut i olika pages.
 
 ### States
