@@ -1,0 +1,7 @@
+
+@media all and (max-width: 700px) {
+    .responsiveImg {
+        width: 100%;
+        justify-content: center;
+    }
+}

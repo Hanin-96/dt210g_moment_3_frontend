@@ -47,3 +47,15 @@
 .container:hover .text {
     display: block;
 }
+
+
+@media all and (max-width: 1000px) {
+    .responsiveImg {
+        width: 100%;
+        justify-content: center !important;
+    }
+
+    .headerH1 {
+        text-align: center;
+    }
+}

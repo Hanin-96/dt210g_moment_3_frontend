@@ -22,7 +22,7 @@ function PutModal({ putImage, onCloseProp }: { putImage: UpdateImage, onClosePro
     return (
         <div className={ModalStyle.pageBody}>
                 <div className={ModalStyle.textBoxStyle}>
-                    <button className={ModalStyle.btnCancel} onClick={() => onCloseProp({ title: "", description: "" })} style={{ background: "none", color: "#1e1e1e" }}><X /></button>
+                    <button className={ModalStyle.btnCancel} onClick={() => onCloseProp({ title: "", description: "" })} style={{ background: "none", color: "#1e1e1e", marginBottom: "1rem" }}><X /></button>
                     <h1 style={{ marginBottom: "1rem" }}>Ändra bildinformation</h1>
 
                     <form onSubmit={handleOnSubmit}>

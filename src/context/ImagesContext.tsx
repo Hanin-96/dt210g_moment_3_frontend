@@ -11,7 +11,7 @@ interface ImagesProviderProps {
 export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
     const [images, setImages] = useState<Image[]>([]);
     const [oneImage, setOneImage] = useState<Image | null>(null);
-    const [error, setError] = useState("");
+    //const [error, setError] = useState("");
 
     const getImages = async (): Promise<void> => {
         try {
@@ -85,7 +85,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
         try {
 
             if (userId == "") {
-                setError("Du har inget användarId");
+                //setError("Du har inget användarId");
                 return;
             }
 
@@ -120,7 +120,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
         try {
 
             if (imageId == "") {
-                setError("Du har inget bild Id");
+                //setError("Du har inget bild Id");
                 return;
             }
             const token = localStorage.getItem("token");

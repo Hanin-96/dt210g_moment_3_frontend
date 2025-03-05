@@ -66,6 +66,14 @@ input {
     padding: 0.5rem;
 }
 
+textarea {
+    width: 100%;
+    display: block;
+    resize: vertical;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
 input[type="file"] {
     margin-bottom: 0;
 }

@@ -1,10 +1,10 @@
-import DeleteModal from "./Modal/DeleteModal";
-import PutModal from "./Modal/PutModal";
-import { Image, UpdateImage } from "../types/fetch.types"
+import DeleteModal from "../Modal/DeleteModal";
+import PutModal from "../Modal/PutModal";
+import { Image, UpdateImage } from "../../types/fetch.types"
 import { useState } from "react";
 
 //Importera authcontext
-import { useImage } from "../context/ImagesContext";
+import { useImage } from "../../context/ImagesContext";
 
 function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
     //State för att visa modal
@@ -46,7 +46,7 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
 
     return (
         <>
-            <div key={myPageImagesProp._id} style={{ position: "relative", width: "100%", maxWidth: "30rem"}}>
+            <div key={myPageImagesProp._id} style={{ position: "relative", width: "100%", maxWidth: "30rem" }}>
                 <p>Titel: <span style={titleText}>{myPageImagesProp.title}</span></p>
                 <br />
                 <div style={imgBtnWrap}>
@@ -67,7 +67,7 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
 
                     <button onClick={() => setShowPutModal(true)} style={{ ...btnStyle, backgroundColor: "white", color: "#1e1e1e" }}>Ändra</button>
 
-                    {showPutModal && <PutModal putImage={{title: myPageImagesProp.title, description: myPageImagesProp.description}} onCloseProp={
+                    {showPutModal && <PutModal putImage={{ title: myPageImagesProp.title, description: myPageImagesProp.description }} onCloseProp={
                         (updateImage: UpdateImage) => {
                             if (updateImage && updateImage.title != "" && updateImage.description != "") {
                                 //Delete funktion ska kallas här
@@ -77,7 +77,7 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
                         }
                     } />}
 
-                    
+
                 </div>
             </div>
         </>

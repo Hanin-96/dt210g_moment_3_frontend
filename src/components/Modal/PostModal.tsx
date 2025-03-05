@@ -2,13 +2,13 @@ import { X } from 'lucide-react';
 import { Upload } from 'lucide-react';
 import ModalStyle from "../Modal/ModalStyle.module.css";
 import { useState } from "react";
-import { PostImage} from "../../types/fetch.types";
+import { PostImage } from "../../types/fetch.types";
 
 
 
 function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void }) {
     //State för formulär
-    const [formData, setFormData] = useState<PostImage>({ title: "", description: "", file: undefined})
+    const [formData, setFormData] = useState<PostImage>({ title: "", description: "", file: undefined })
     const [file, setFile] = useState<File>();
 
     const [error, setError] = useState("");
@@ -18,10 +18,10 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
         event.preventDefault();
         setError('');
 
-        if(typeof(file) === "undefined") {
+        if (typeof (file) === "undefined") {
             setError("Bildfilen saknas");
             return;
-        } else if(file.size > 1000000) {
+        } else if (file.size > 1000000) {
             setError("Bildfilen får max vara 1mb");
             return;
         }
@@ -31,13 +31,13 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
 
     }
 
-    const handleOnChangeImage =(event: React.FormEvent<HTMLInputElement>) => {
+    const handleOnChangeImage = (event: React.FormEvent<HTMLInputElement>) => {
         setError("");
         const target = event.target as HTMLInputElement & {
-            files : FileList;
+            files: FileList;
         }
         setFile(target.files[0]);
-        
+
     }
 
     return (
@@ -53,40 +53,42 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
                             <input
                                 type="text"
                                 required
-                                value={formData.title} 
-                                onChange={(event) => setFormData({...formData, title: event.target.value})}/>
+                                value={formData.title}
+                                onChange={(event) => setFormData({ ...formData, title: event.target.value })} />
                         </div>
 
                         <div className='formBox'>
                             <label htmlFor="description">Beskrivning:</label>
-                            <input 
-                            type="text"
-                            required
-                            value={formData.description} 
-                            onChange={(event) => setFormData({...formData, description: event.target.value})}/>
+
+                            <textarea name="description" id="description" required
+                                value={formData.description}
+                                onChange={(event) => setFormData({ ...formData, description: event.target.value })}>
+
+                            </textarea>
+
                         </div>
 
-                        <div className='formBox'>
+                        <div className='formBox' style={{display: "flex"}}>
                             <div style={{ display: "flex", alignItems: "center" }}>
                                 <Upload />
                             </div>
-                            <input 
-                            type="file" 
-                            accept='image/png, image/jpg, image/JPG'
-                            value={formData.file} 
-                            onChange={handleOnChangeImage}
+                            <input
+                                type="file"
+                                accept='image/png, image/jpg, image/JPG'
+                                value={formData.file}
+                                onChange={handleOnChangeImage}
                             />
                             <span>Max 1mb</span>
 
                             {
-                            error && <span style={{ fontSize: "1.5rem", color: "red" }}>{error}</span>
-                        }
+                                error && <span style={{ fontSize: "1.5rem", color: "red" }}>{error}</span>
+                            }
 
                         </div>
                         <div className={ModalStyle.modalBtn}>
-                        <button onClick={() => onCloseProp({ title: "", description: "", file: undefined })}>Ångra</button>
-                        <button type="submit">Lägg till</button>
-                    </div>
+                            <button onClick={() => onCloseProp({ title: "", description: "", file: undefined })}>Ångra</button>
+                            <button type="submit">Lägg till</button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -45,9 +45,9 @@ function HomePage() {
   return (
     <>
       <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto", opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s", padding: "0 1rem"}}>
-        <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>PinCollect</h1>
+        <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}  className={HomeStyle.headerH1}>PinCollect</h1>
 
-        <div style={imageContainer}>
+        <div style={imageContainer} className={HomeStyle.responsiveImg}>
           {images && images.length > 0 ? (
             images.map((image: Image) => (
               <div key={image._id} style={{ position: "relative"}} className={HomeStyle.container}>

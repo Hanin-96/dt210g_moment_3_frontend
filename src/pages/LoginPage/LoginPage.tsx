@@ -65,7 +65,7 @@ function LoginPage() {
                         <label htmlFor="password">Lösenord:</label>
                         <input
                             id="password"
-                            type="text"
+                            type="password"
                             required
                             value={password}
                             onChange={(event) => setPassword(event.target.value)} />

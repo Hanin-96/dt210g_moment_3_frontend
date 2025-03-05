@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext"
 import { useImage } from "../context/ImagesContext";
 import { Image, PostImage } from '../types/fetch.types';
-import MyPageImages from "../components/MyPageImages";
+import MyPageImages from "../components/MyPagesImages/MyPageImages";
 import PostModal from "../components/Modal/PostModal";
 
 
@@ -52,20 +52,20 @@ function MyPage() {
         <h1>Min sida</h1>
         <h2>Inloggad, {user?.firstname ? user.firstname : ""}</h2>
 
-        <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto"}}>
+        <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto" }}>
           <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>Bildsamling</h1>
 
           <div>
             <button onClick={() => setShowModal(true)} style={addBtn}>Lägg till</button>
             {showModal && <PostModal onCloseProp={
-                            (newImage: PostImage) => {
-                                if (newImage.file != undefined && user?._id) {
-                                  console.log("Image to post: ", newImage);
-                                    //Delete funktion ska kallas här
-                                    postImage(newImage, user?._id);
-                                }
-                                setShowModal(false)
-                            }
+              (newImage: PostImage) => {
+                if (newImage.file != undefined && user?._id) {
+                  console.log("Image to post: ", newImage);
+                  //Delete funktion ska kallas här
+                  postImage(newImage, user?._id);
+                }
+                setShowModal(false)
+              }
             } />}
           </div>
 
