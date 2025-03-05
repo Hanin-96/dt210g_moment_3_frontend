@@ -13,6 +13,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
     const [oneImage, setOneImage] = useState<Image | null>(null);
     //const [error, setError] = useState("");
 
+    //Hämta alla bilder publikt
     const getImages = async (): Promise<void> => {
         try {
             const response = await fetch("http://localhost:3000/images", {
@@ -36,6 +37,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
         }
     }
 
+    //Hämta specifik bild publikt
     async function getOneImage(imageId: string) {
         try {
             const response = await fetch(`http://localhost:3000/image/${imageId}`, {
@@ -60,6 +62,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
 
     }
 
+    //Ta bort bild
     async function deleteImage(imageId: string) {
         try {
             const token = localStorage.getItem("token");
@@ -80,7 +83,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
             console.error("Det gick inte att radera bilden:", error);
         }
     }
-
+    //Ladda upp ny bild
     async function postImage(image: PostImage, userId: string) {
         try {
 
@@ -88,7 +91,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
                 //setError("Du har inget användarId");
                 return;
             }
-
+            //Skapar ny formdata för att kunna skicka fil
             const formData = new FormData();
             formData.append("title", image.title);
             formData.append("description", image.description);
@@ -96,7 +99,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
             if (image.file) {
                 formData.append("file", image.file);
             }
-
+            //Hämtar token för kontrollera användare behörighet
             const token = localStorage.getItem("token");
 
             const response = await fetch(`http://localhost:3000/upload/${userId}`, {
@@ -115,7 +118,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
             console.error("Det gick inte att lägga till bilden:", error);
         }
     }
-
+    //Uppdatera bildinformation
     async function putImage(image: UpdateImage, imageId: string) {
         try {
 

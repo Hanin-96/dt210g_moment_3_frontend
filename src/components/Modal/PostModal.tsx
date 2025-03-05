@@ -9,6 +9,7 @@ import { PostImage } from "../../types/fetch.types";
 function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void }) {
     //State för formulär
     const [formData, setFormData] = useState<PostImage>({ title: "", description: "", file: undefined })
+
     const [file, setFile] = useState<File>();
 
     const [error, setError] = useState("");
@@ -18,6 +19,7 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
         event.preventDefault();
         setError('');
 
+        //Felvalidering
         if (typeof (file) === "undefined") {
             setError("Bildfilen saknas");
             return;
@@ -25,12 +27,14 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
             setError("Bildfilen får max vara 1mb");
             return;
         }
-        console.log('file', file);
+        //console.log('file', file);
 
+        //Titel och beskrivning är antingen tomma eller ifyllda
         onCloseProp({ title: formData.title, description: formData.description, file: file });
 
     }
 
+    //Hantera bilduppladdning
     const handleOnChangeImage = (event: React.FormEvent<HTMLInputElement>) => {
         setError("");
         const target = event.target as HTMLInputElement & {
@@ -68,7 +72,7 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
 
                         </div>
 
-                        <div className='formBox' style={{display: "flex"}}>
+                        <div className='formBox' style={{ display: "flex" }}>
                             <div style={{ display: "flex", alignItems: "center" }}>
                                 <Upload />
                             </div>
@@ -79,12 +83,11 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
                                 onChange={handleOnChangeImage}
                             />
                             <span>Max 1mb</span>
-
-                            {
-                                error && <span style={{ fontSize: "1.5rem", color: "red" }}>{error}</span>
-                            }
-
                         </div>
+
+                        {
+                            error && <p style={{ fontSize: "1.5rem", color: "red" }}>{error}</p>
+                        }
                         <div className={ModalStyle.modalBtn}>
                             <button onClick={() => onCloseProp({ title: "", description: "", file: undefined })}>Ångra</button>
                             <button type="submit">Lägg till</button>

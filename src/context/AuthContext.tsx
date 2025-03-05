@@ -89,7 +89,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     useEffect(() => {
         checkToken();
     
-        // Set up an interval to check the token every minute (60000 milliseconds)
+        //Kontrollera användares token var 30 min
         const intervalId = setInterval(() => {
             checkToken();
         }, 1800000);

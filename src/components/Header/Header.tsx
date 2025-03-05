@@ -31,7 +31,7 @@ function Header() {
               }
               <li>
                 {
-                  !user ? <NavLink to="/login" onClick={toggleMenuBar} className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Logga in</NavLink> : <NavLink to="/login" onClick={logout}>Logga ut</NavLink>
+                  !user ? <NavLink to="/login" onClick={toggleMenuBar} className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Logga in</NavLink> : <NavLink to="/login" onClick={() => { toggleMenuBar(); logout(); }} className={({ isActive }) => isActive ? HeaderModuleStyle.active : ""}>Logga ut</NavLink>
                 }
               </li>
             </ul>

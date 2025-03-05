@@ -56,6 +56,7 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
                 <div style={{ display: "flex", gap: "2rem", justifyContent: "space-between" }}>
                     <button onClick={() => setShowDeleteModal(true)} style={btnStyle}>Ta bort</button>
                     {showDeleteModal && <DeleteModal onCloseProp={
+                        //Om användare klickar på ta bort i modalen då blir confirmDelete true
                         (confirmDelete: boolean) => {
                             if (confirmDelete) {
                                 //Delete funktion ska kallas här
