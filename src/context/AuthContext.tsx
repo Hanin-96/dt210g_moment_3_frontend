@@ -17,7 +17,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const login = async (credentials: LoginCredentials) => {
         try {
-            const response = await fetch("http://localhost:3000/login", {
+            const response = await fetch("https://pin-collect-api.onrender.com/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -48,7 +48,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const registerUser = async (credentials: RegisterCredentials) => {
         try {
-            const response = await fetch("http://localhost:3000/user", {
+            const response = await fetch("https://pin-collect-api.onrender.com/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -85,7 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
 
         try {
-            const response = await fetch("http://localhost:3000/userpage", {
+            const response = await fetch("https://pin-collect-api.onrender.com/userpage", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

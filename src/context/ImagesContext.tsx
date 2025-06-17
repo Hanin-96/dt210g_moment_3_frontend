@@ -16,7 +16,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
     //Hämta alla bilder publikt
     const getImages = async (): Promise<void> => {
         try {
-            const response = await fetch("http://localhost:3000/images", {
+            const response = await fetch("https://pin-collect-api.onrender.com/images", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -40,7 +40,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
     //Hämta specifik bild publikt
     async function getOneImage(imageId: string) {
         try {
-            const response = await fetch(`http://localhost:3000/image/${imageId}`, {
+            const response = await fetch(`https://pin-collect-api.onrender.com/image/${imageId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -67,7 +67,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
         try {
             const token = localStorage.getItem("token");
 
-            const response = await fetch(`http://localhost:3000/image/${imageId}`, {
+            const response = await fetch(`https://pin-collect-api.onrender.com/image/${imageId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
             //Hämtar token för kontrollera användare behörighet
             const token = localStorage.getItem("token");
 
-            const response = await fetch(`http://localhost:3000/upload/${userId}`, {
+            const response = await fetch(`https://pin-collect-api.onrender.com/upload/${userId}`, {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -128,7 +128,7 @@ export const ImagesProvider: React.FC<ImagesProviderProps> = ({ children }) => {
             }
             const token = localStorage.getItem("token");
 
-            const response = await fetch(`http://localhost:3000/image/${imageId}`, {
+            const response = await fetch(`https://pin-collect-api.onrender.com/image/${imageId}`, {
                 method: "PUT",
                 body: JSON.stringify(image),
                 headers: {

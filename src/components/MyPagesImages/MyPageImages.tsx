@@ -49,7 +49,7 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
                 <br />
                 <div style={imgBtnWrap}>
                     <Link to={`/${myPageImagesProp._id}`}>
-                        <img src={myPageImagesProp.imageUrl} alt={myPageImagesProp.title} style={{ maxHeight: "30rem", objectFit: "cover", height: "100%", width: "100%" }} />
+                        <img src={myPageImagesProp.imageUrl} alt={myPageImagesProp.title} style={{ maxHeight: "30rem", objectFit: "cover", height: "100%", width: "100%", minWidth:"30rem", maxWidth: "30rem" }} />
                     </Link>
                 </div>
 
