@@ -55,13 +55,16 @@ function ImagePage() {
 
             <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto 20rem auto" }}>
                 {oneImage &&
-                    <article key={oneImage._id} style={{...articleStyle, opacity: imageLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out"}}>
-                        <div style={{maxWidth: "40rem", width: "100%"}}>
-                            <img src={`http://localhost:3000/file/${oneImage.fileName}`} alt={oneImage.title} style={{ maxWidth: "40rem", width: "100%"}} />
-                            <p>&copy; {oneImage.firstname} {oneImage.lastname}</p>
+                    <article key={oneImage._id} style={{ ...articleStyle, opacity: imageLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out", marginBottom:"2rem"}}>
+                        <div style={{ maxWidth: "40rem", width: "100%" }}>
+                            <img src={oneImage.imageUrl} alt={oneImage.title} style={{ maxWidth: "40rem", width: "100%", objectFit: "cover", maxHeight: "40rem", height: "100%", minHeight: "30rem"}} />
+                            <div style={{display:"flex", justifyContent:"space-between"}}>
+                                <p>&copy; {oneImage.username}</p>
+                                <p>{oneImage.created ? new Date(oneImage.created).toLocaleDateString() : ''}</p>
+                            </div>
                         </div>
 
-                        <div style={{width: "100%"}}>
+                        <div style={{ width: "100%"}}>
                             <h1>{oneImage.title}</h1>
                             <br />
                             <p>{oneImage.description}</p>

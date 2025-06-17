@@ -4,7 +4,8 @@ import { useState, useEffect } from "react"
 //Importera authcontext
 import { useAuth } from "../../context/AuthContext";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ChevronRight, UserRound } from "lucide-react";
 
 function LoginPage() {
     const [username, setUsername] = useState('');
@@ -47,8 +48,8 @@ function LoginPage() {
     }
     return (
         <>
-        <img src={bgPattern} alt="Mönster" style={bgPatternStyle}/>
-            <div style={{padding: "1rem", paddingTop: "20rem", paddingBottom: "20rem"}}>
+            <img src={bgPattern} alt="Mönster" style={bgPatternStyle} />
+            <div style={{ padding: "1rem", paddingTop: "20rem", paddingBottom: "20rem" }}>
                 <div className={LoginStyle.loginContainer}>
                     <h1 style={{ textAlign: "center", marginBottom: "4rem" }}>Inloggning</h1>
                     <form onSubmit={handleSubmit} className={LoginStyle.form}>
@@ -78,7 +79,11 @@ function LoginPage() {
                         <br />
                         <button type="submit" style={{ marginTop: "2rem" }}>Logga in</button>
                     </form>
+                    <div>
+                        <Link to="/register" style={{ color: "#1e1e1e", display: "flex", marginTop: "2rem", justifyContent: "flex-end", alignItems: "center", fontSize: "1.5rem" }}>Inget användarkonto? Registrera<ChevronRight /></Link>
+                    </div>
                 </div>
+
             </div>
         </>
     )

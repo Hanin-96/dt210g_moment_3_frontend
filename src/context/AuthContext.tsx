@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 
-import { User, LoginCredentials, AuthResponse, AuthContextType } from "../types/auth.types";
+import { User, LoginCredentials, AuthResponse, AuthContextType, RegisterCredentials } from "../types/auth.types";
 
 //Skapar context
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -39,9 +39,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
             }
 
-
         } catch (error) {
             throw error;
+        }
+
+    }
+
+
+    const registerUser = async (credentials: RegisterCredentials) => {
+        try {
+            const response = await fetch("http://localhost:3000/user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(credentials)
+            }
+            )
+            if (!response.ok) {
+                throw new Error("Inloggning misslyckades");
+            }
+
+        } catch (error) {
+            throw Error;
         }
 
     }
@@ -58,9 +78,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     //Validera token för inloggad
     const checkToken = async () => {
         const token = localStorage.getItem("token");
-        
 
-        if(!token) {
+
+        if (!token) {
             return;
         }
 
@@ -73,7 +93,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 }
             })
 
-            if(response.ok) {
+            if (response.ok) {
                 const data = await response.json();
                 setUser(data.user);
             }
@@ -84,11 +104,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     }
 
-    
+
     //Köra metod för kontroll om användare är inne
     useEffect(() => {
         checkToken();
-    
+
         //Kontrollera användares token var 30 min
         const intervalId = setInterval(() => {
             checkToken();
@@ -98,10 +118,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return () => clearInterval(intervalId);
     }, [])
 
-    
+
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, registerUser }}>
             {children}
         </AuthContext.Provider>
     )
@@ -111,7 +131,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 export const useAuth = (): AuthContextType => {
     const context = useContext(AuthContext);
 
-    if(!context) {
+    if (!context) {
         throw new Error("useAuth måste användas inom en AuthProvider")
     }
 

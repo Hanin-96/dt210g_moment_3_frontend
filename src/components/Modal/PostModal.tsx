@@ -23,7 +23,7 @@ function PostModal({ onCloseProp }: { onCloseProp: (newImage: PostImage) => void
         if (typeof (file) === "undefined") {
             setError("Bildfilen saknas");
             return;
-        } else if (file.size > 1000000) {
+        } else if (file.size > 1048576) {
             setError("Bildfilen får max vara 1mb");
             return;
         }

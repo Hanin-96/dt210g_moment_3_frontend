@@ -4,11 +4,12 @@ export interface Image {
     _id: string,
     title: string,
     description: string,
-    fileName: string,
+    imageUrl: string,
     userId: { _id: string; firstname: string; lastname: string; username: string },
     username: string,
     firstname: string,
-    lastname: string
+    lastname: string,
+    created: string
 }
 
 export interface PostImage {

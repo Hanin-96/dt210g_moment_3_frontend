@@ -30,7 +30,8 @@ function HomePage() {
     maxHeight: "30rem",
     width: "100%",
     display: "block",
-    objectFit: "cover"
+    objectFit: "cover",
+    boxShadow: "0px 2.5px 5px -3px rgba(30, 30, 30, 0.2)"
   }
 
   const imageContainer: object = {
@@ -44,15 +45,14 @@ function HomePage() {
 
   return (
     <>
-      <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto", opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s", padding: "0 1rem"}}>
-        <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}  className={HomeStyle.headerH1}>PinCollect</h1>
-
+      <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto", opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s", padding: "0 1rem" }}>
+        <h1 style={{marginTop:"10rem", marginBottom:"5rem", textAlign:"center"}}>Bildsamling</h1>
         <div style={imageContainer} className={HomeStyle.responsiveImg}>
           {images && images.length > 0 ? (
             images.map((image: Image) => (
-              <div key={image._id} style={{ position: "relative"}} className={HomeStyle.container}>
+              <div key={image._id} style={{ position: "relative" }} className={HomeStyle.container}>
                 <Link to={`/${image._id}`}>
-                  <img src={`http://localhost:3000/file/${image.fileName}`} alt={image.title} style={imageWrap} />
+                  <img src={image.imageUrl} alt={image.title} style={imageWrap} />
 
                   <div className={HomeStyle.overlay}>
 

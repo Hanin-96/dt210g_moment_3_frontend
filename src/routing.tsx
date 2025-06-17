@@ -6,6 +6,7 @@ import ImagePage from "./pages/ImagePage";
 import ProtectedRoute from "./context/ProtectedRoute";
 import MyPage from "./pages/MyPage";
 import { ImagesProvider } from "./context/ImagesContext";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,12 @@ const router = createBrowserRouter([
                             <MyPage />
                         </ProtectedRoute>
                     </ImagesProvider>
+                )
+            },
+             {
+                path: "/register",
+                element: (
+                    <RegisterPage />
                 )
             },
 

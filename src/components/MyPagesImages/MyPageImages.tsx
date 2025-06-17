@@ -5,6 +5,7 @@ import { useState } from "react";
 
 //Importera authcontext
 import { useImage } from "../../context/ImagesContext";
+import { Link } from "react-router-dom";
 
 function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
     //State för att visa modal
@@ -16,7 +17,6 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
 
     const imgBtnWrap: object = {
         display: "flex",
-        flexDirection: "column",
         width: "100%",
         maxWidth: "30rem",
         marginBottom: "2rem",
@@ -41,17 +41,18 @@ function MyPageImages({ myPageImagesProp }: { myPageImagesProp: Image }) {
         margin: "0"
     }
 
-
-
-
     return (
         <>
             <div key={myPageImagesProp._id} style={{ position: "relative", width: "100%", maxWidth: "30rem" }}>
+
                 <p>Titel: <span style={titleText}>{myPageImagesProp.title}</span></p>
                 <br />
                 <div style={imgBtnWrap}>
-                    <img src={`http://localhost:3000/file/${myPageImagesProp.fileName}`} alt={myPageImagesProp.title} style={{ maxHeight: "30rem", objectFit: "cover", height: "100%", width: "100%" }} />
+                    <Link to={`/${myPageImagesProp._id}`}>
+                        <img src={myPageImagesProp.imageUrl} alt={myPageImagesProp.title} style={{ maxHeight: "30rem", objectFit: "cover", height: "100%", width: "100%" }} />
+                    </Link>
                 </div>
+
 
                 <div style={{ display: "flex", gap: "2rem", justifyContent: "space-between" }}>
                     <button onClick={() => setShowDeleteModal(true)} style={btnStyle}>Ta bort</button>
