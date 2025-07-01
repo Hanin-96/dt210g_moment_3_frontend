@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import { useAuth } from "../../context/AuthContext";
 
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronRight, UserRound } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 function LoginPage() {
     const [username, setUsername] = useState('');

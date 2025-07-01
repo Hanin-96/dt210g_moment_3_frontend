@@ -1,10 +1,10 @@
 import LoginStyle from "../LoginPage/LoginPage.module.css";
 import bgPattern from "../../assets/pattern.svg";
-import { useState, useEffect } from "react"
+import { useState} from "react"
 //Importera authcontext
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import { ChevronLeft, UserRoundPlus } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 function RegisterPage() {
 
