@@ -67,7 +67,7 @@ function ImagePage() {
                         <div style={{ width: "100%"}}>
                             <h1>{oneImage.title}</h1>
                             <br />
-                            <p>{oneImage.description}</p>
+                            <p style={{lineHeight:"150%"}}>{oneImage.description}</p>
                         </div>
 
                     </article>
