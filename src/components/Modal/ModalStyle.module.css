@@ -80,6 +80,7 @@ textarea {
 
 input[type="file"] {
     margin-bottom: 0;
+    border: none;
 }
 
 
