@@ -1,6 +1,6 @@
 import LoginStyle from "../LoginPage/LoginPage.module.css";
 import bgPattern from "../../assets/pattern.svg";
-import { useState} from "react"
+import { useState } from "react"
 //Importera authcontext
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -19,6 +19,9 @@ function RegisterPage() {
     const [msgRegister, setmsgRegister] = useState("");
     const [error, setError] = useState('');
 
+    //LoadingSpinner
+    const [loadingSpinner, setLoadingSpinner] = useState(false);
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -30,7 +33,9 @@ function RegisterPage() {
             if (firstname === "" || lastname === "" || email === "" || username === "" || password === "") {
                 return setError("Fyll i varje fält!")
             }
+            setLoadingSpinner(true);
             await registerUser({ firstname, lastname, email, username, password });
+            setLoadingSpinner(false);
             setmsgRegister("Användarkonto har registrerats");
 
             //Nollställ inputsfälten
@@ -41,6 +46,7 @@ function RegisterPage() {
             setPassword("");
         } catch (error) {
             //console.log(error)
+            setLoadingSpinner(false);
             setError("Serverfel, E-post/användarnamn finns redan");
         }
     }
@@ -111,11 +117,10 @@ function RegisterPage() {
                                 onChange={(e) => setPassword(e.target.value)} />
                         </div>
 
-                        {
-                            error && <span style={{ fontSize: "1.5rem", color: "red", marginTop: "1rem", marginBottom: "1rem"}}>{error}</span>
-                        }
+                        {error && <p style={{ fontSize: "1.5rem", color: "red", marginTop: "1rem", marginBottom: "1rem" }}>{error}</p>}
 
                         <button type="submit">Registrera</button>
+                        {loadingSpinner && <div className="loadingSpinner"></div>}
                     </form>
 
                     {

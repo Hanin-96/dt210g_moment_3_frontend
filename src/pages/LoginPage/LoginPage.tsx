@@ -6,11 +6,13 @@ import { useAuth } from "../../context/AuthContext";
 
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
+import '../../components/Loading/LoadingSpinner.css';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loadingSpinner, setLoadingSpinner] = useState(false);
 
     const { login, user } = useAuth();
     const navigate = useNavigate();
@@ -26,13 +28,16 @@ function LoginPage() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
+        setLoadingSpinner(true);
 
         try {
             await login({ username, password });
+            setLoadingSpinner(false);
             console.log("Inloggning lyckades: ", user)
 
         } catch (error) {
-            setError("Fel användarnamn/lösenord")
+            setLoadingSpinner(false);
+            setError("Fel användarnamn/lösenord");
 
         }
     }
@@ -78,6 +83,7 @@ function LoginPage() {
                         }
                         <br />
                         <button type="submit" style={{ marginTop: "2rem" }}>Logga in</button>
+                        {loadingSpinner && <div className="loadingSpinner"></div>}
                     </form>
                     <div>
                         <Link to="/register" style={{ color: "#1e1e1e", display: "flex", marginTop: "2rem", justifyContent: "flex-end", alignItems: "center", fontSize: "1.5rem" }}>Inget användarkonto? Registrera<ChevronRight /></Link>

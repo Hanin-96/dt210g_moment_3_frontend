@@ -26,7 +26,10 @@ function MyPage() {
     const fetchImages = async () => {
       try {
         setIsLoading(true);
-        await getImages();
+        if (user) {
+          await getImages();
+        }
+
         setIsLoading(false);
 
 
@@ -39,7 +42,7 @@ function MyPage() {
     };
     fetchImages();
 
-  }, []);
+  }, [user]);
 
   const addBtn: object = {
     backgroundColor: "#1e1e1e",
@@ -56,46 +59,48 @@ function MyPage() {
 
   return (
     <>
-      <div style={{ maxWidth: "100rem", width: "100%", margin: "4rem auto 20rem auto", padding: "0 1rem" }}>
-        <h1>Min sida</h1>
-        <h2>Inloggad, {user?.username ? user.username : ""}</h2>
+      {user &&
+        <div style={{ maxWidth: "100rem", width: "100%", margin: "4rem auto 20rem auto", padding: "0 1rem" }}>
+          <h1>Min sida</h1>
+          <h2>Inloggad, {user?.username ? user.username : ""}</h2>
 
-        <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto" }}>
-          <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>Bildsamling</h1>
+          <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto" }}>
+            <h1 style={{ marginBottom: "2rem", marginTop: "4rem" }}>Bildsamling</h1>
 
-          <div>
-            <button onClick={() => setShowModal(true)} style={addBtn}>Lägg till</button>
-            {showModal && <PostModal onCloseProp={
-              (newImage: PostImage) => {
-                if (newImage.file != undefined && user?._id) {
-                  console.log("Image to post: ", newImage);
-                  //Delete funktion ska kallas här
-                  postImage(newImage, user?._id);
+            <div>
+              <button onClick={() => setShowModal(true)} style={addBtn}>Lägg till</button>
+              {showModal && <PostModal onCloseProp={
+                (newImage: PostImage) => {
+                  if (newImage.file != undefined && user?._id) {
+                    console.log("Image to post: ", newImage);
+                    //Delete funktion ska kallas här
+                    postImage(newImage, user?._id);
+                  }
+                  setShowModal(false)
                 }
-                setShowModal(false)
-              }
-            } />}
-          </div>
-          {isLoading &&
-            <div className={ModalStyle.loadingSpinner}></div>
-          }
+              } />}
+            </div>
+            {isLoading &&
+              <div className={ModalStyle.loadingSpinner}></div>
+            }
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem" }}>
 
-            {images && images.length > 0 && !isLoading ? (
-              images
-                .filter((image: Image) => image.userId?._id === user?._id)
-                .map((image: Image) => (
-                  <MyPageImages myPageImagesProp={image} key={image._id} />
-                ))
-            ) : (
-              <p>{error}</p>
-            )}
-          </div>
+              {images && images.length > 0 && !isLoading ? (
+                images
+                  .filter((image: Image) => image.userId?._id === user?._id)
+                  .map((image: Image) => (
+                    <MyPageImages myPageImagesProp={image} key={image._id} />
+                  ))
+              ) : (
+                <p>{error}</p>
+              )}
+            </div>
 
 
-        </div >
-      </div>
+          </div >
+        </div>
+      }
     </>
   )
 }

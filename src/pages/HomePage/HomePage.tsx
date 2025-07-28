@@ -3,20 +3,26 @@ import { useImage } from '../../context/ImagesContext';
 import { Image } from '../../types/fetch.types';
 import { Link } from 'react-router-dom';
 import HomeStyle from "../HomePage/HomeStyle.module.css";
+import '../../components/Loading/LoadingSpinner.css';
 function HomePage() {
   const [error, setError] = useState('');
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const { images, getImages } = useImage();
+  //Loading
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
 
   //useEffect för att hämta in poster
   useEffect(() => {
     const fetchImages = async () => {
+      setLoadingSpinner(true);
       try {
         await getImages()
+        setLoadingSpinner(false);
         setImagesLoaded(true);
 
       } catch (error) {
+        setLoadingSpinner(false);
         setError("Det gick inte att hämta in bilder")
 
       }
@@ -45,8 +51,9 @@ function HomePage() {
 
   return (
     <>
-      <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto", opacity: imagesLoaded ? 1 : 0, transition: "opacity 0.5s", padding: "0 1rem" }}>
-        <h1 style={{marginTop:"10rem", marginBottom:"5rem", textAlign:"center"}}>Bildsamling</h1>
+      <div style={{ maxWidth: "100rem", width: "100%", margin: "0 auto", padding: "0 1rem" }}>
+        <h1 style={{ marginTop: "10rem", marginBottom: "5rem", textAlign: "center" }}>Bildsamling</h1>
+        {loadingSpinner && <div className="loadingSpinner"></div>}
         <div style={imageContainer} className={HomeStyle.responsiveImg}>
           {images && images.length > 0 ? (
             images.map((image: Image) => (
