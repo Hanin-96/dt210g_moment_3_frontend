@@ -18,8 +18,9 @@ function HomePage() {
       setLoadingSpinner(true);
       try {
         await getImages()
-        setLoadingSpinner(false);
+        
         setImagesLoaded(true);
+        setLoadingSpinner(false);
 
       } catch (error) {
         setLoadingSpinner(false);
