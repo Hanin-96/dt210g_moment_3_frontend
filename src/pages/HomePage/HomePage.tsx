@@ -24,7 +24,7 @@ function HomePage() {
         await getImages()
         setImagesLoaded(true);
         setLoadingSpinner(false);
-        
+
         if (images && images.length > 0) {
           setImagesLoaded(true);
           setLoadingSpinner(false);
@@ -64,7 +64,7 @@ function HomePage() {
         <h1 style={{ marginTop: "10rem", marginBottom: "5rem", textAlign: "center" }}>Bildsamling</h1>
         {loadingSpinner && <div className="loadingSpinner"></div>}
         <div style={imageContainer} className={HomeStyle.responsiveImg}>
-          {images && images.length > 0 ? (
+          {imagesLoaded && images && images.length > 0 ? (
             images.map((image: Image) => (
               <div key={image._id} style={{ position: "relative" }} className={HomeStyle.container}>
                 <Link to={`/${image._id}`}>
