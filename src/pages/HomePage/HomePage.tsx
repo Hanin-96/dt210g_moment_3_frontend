@@ -12,25 +12,26 @@ function HomePage() {
   //Loading
   const [loadingSpinner, setLoadingSpinner] = useState(false);
 
-  //loading state
-  const [loading, setLoading] = useState(false);
 
   //useEffect för att hämta in poster
   useEffect(() => {
+    setLoadingSpinner(false);
     const fetchImages = async () => {
 
       try {
         setLoadingSpinner(true);
-        setLoading(true);
+        setImagesLoaded(false);
         await getImages()
-
         setImagesLoaded(true);
         setLoadingSpinner(false);
-        setLoading(false);
+        
+        if (images && images.length > 0) {
+          setImagesLoaded(true);
+          setLoadingSpinner(false);
+        }
 
       } catch (error) {
         setLoadingSpinner(false);
-        setLoading(false);
         setError("Det gick inte att hämta in bilder")
 
       }
@@ -63,7 +64,7 @@ function HomePage() {
         <h1 style={{ marginTop: "10rem", marginBottom: "5rem", textAlign: "center" }}>Bildsamling</h1>
         {loadingSpinner && <div className="loadingSpinner"></div>}
         <div style={imageContainer} className={HomeStyle.responsiveImg}>
-          {!loading && images && images.length > 0 ? (
+          {images && images.length > 0 ? (
             images.map((image: Image) => (
               <div key={image._id} style={{ position: "relative" }} className={HomeStyle.container}>
                 <Link to={`/${image._id}`}>
